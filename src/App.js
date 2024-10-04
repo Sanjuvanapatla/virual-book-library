@@ -1,25 +1,23 @@
-import logo from './logo.svg';
+// src/App.js
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Change here
+import HomePage from './pages/HomePage';
+import BookDetailsPage from './pages/BookDetailsPage';
+import MyLibraryPage from './pages/MyLibraryPage';
 import './App.css';
 
-function App() {
+const App = () => {
+  const [library, setLibrary] = useState([]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes> 
+        <Route path="/" element={<HomePage library={library} setLibrary={setLibrary} />} />
+        <Route path="/book/:id" element={<BookDetailsPage library={library} setLibrary={setLibrary} />} />
+        <Route path="/my-library" element={<MyLibraryPage library={library} setLibrary={setLibrary} />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
